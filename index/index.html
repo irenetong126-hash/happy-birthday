@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="zh-TW">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="UTF-8">
+    <title>羅小成生日快樂 RPG</title>
+    <style>
+        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: #5fb9ff; font-family: "Microsoft JhengHei", sans-serif; overflow: hidden; }
+        .hidden { display: none !important; }
+
+        /* --- 像素愛心 --- */
+        #hearts-container { position: absolute; top: 30px; right: 40px; display: flex; gap: 45px; z-index: 100; }
+        .pixel-heart {
+            width: 5px; height: 5px; background: transparent;
+            box-shadow: 5px 0 red, 10px 0 red, 20px 0 red, 25px 0 red, 0 5px red, 5px 5px red, 10px 5px red, 15px 5px red, 20px 5px red, 25px 5px red, 30px 5px red, 0 10px red, 5px 10px red, 10px 10px red, 15px 10px red, 20px 10px red, 25px 10px red, 30px 10px red, 5px 15px red, 10px 15px red, 15px 15px red, 20px 15px red, 25px 15px red, 10px 20px red, 15px 20px red, 20px 20px red, 15px 25px red;
+            transform: scale(1.2); transition: all 0.3s;
+        }
+        .pixel-heart.empty {
+            box-shadow: 5px 0 #555, 10px 0 #555, 20px 0 #555, 25px 0 #555, 0 5px #555, 5px 5px #555, 10px 5px #555, 15px 5px #555, 20px 5px #555, 25px 5px #555, 30px 5px #555, 0 10px #555, 5px 10px #555, 10px 10px #555, 15px 10px #555, 20px 10px #555, 25px 10px #555, 30px 10px #555, 5px 15px #555, 10px 15px #555, 15px 15px #555, 20px 15px #555, 25px 15px #555, 10px 20px #555, 15px 20px #555, 20px 20px #555, 15px 25px #555;
+        }
+
+        .name-tag {
+            position: absolute; top: -30px; left: 0px; background: white; padding: 4px 12px;
+            box-shadow: 0 3px 0 #000, 0 -3px 0 #000, 3px 0 0 #000, -3px 0 0 #000;
+            z-index: 20; font-size: 16px; font-weight: bold; color: black;
+        }
+
+        #scene-1, #game-container, #success-scene { text-align: center; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; }
+        .pixel-btn { margin-top: 40px; padding: 10px 30px; background: #ff7eb9; color: #fff; border: 4px solid #000; box-shadow: 4px 4px 0 #000; cursor: pointer; font-size: 18px; z-index: 10; }
+        .character { position: absolute; bottom: 80px; width: 90%; max-width: 450px; image-rendering: pixelated; z-index: 1; }
+        .dialog-wrapper { position: absolute; bottom: 30px; z-index: 10; cursor: pointer; }
+        .rpg-box { width: 340px; min-height: 110px; background: rgba(0, 0, 0, 0.85); color: #fff; border: 4px solid #fff; padding: 20px; box-shadow: 0 0 0 4px #000; font-size: 18px; line-height: 1.6; text-align: left; position: relative; }
+        
+        .options { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+        .opt { background: none; border: none; color: #fff; cursor: pointer; font-size: 18px; text-align: left; padding: 2px 0; }
+        .opt:hover::before { content: '▶ '; color: #ffeb3b; }
+        .pixel-arrow { position: absolute; bottom: 10px; right: 15px; animation: blink 0.5s infinite alternate; }
+
+        #pixel-envelope {
+            width: 150px; height: 100px; background: #f0d9b5; border: 4px solid #000; 
+            box-shadow: 4px 4px 0 #000; cursor: pointer; position: relative;
+            animation: bounceIn 0.6s forwards; z-index: 50;
+        }
+        .envelope-flap {
+            position: absolute; top: 0; left: 0; width: 0; height: 0;
+            border-left: 75px solid transparent; border-right: 75px solid transparent;
+            border-top: 50px solid #dcbfa0;
+        }
+        .click-tag {
+            position: absolute; bottom: -10px; right: -10px; background: white;
+            padding: 3px 8px; font-size: 14px; border: 3px solid #000; box-shadow: 3px 3px 0 #000;
+            animation: blink 0.5s infinite alternate;
+        }
+
+        .letter-content {
+            width: 320px; min-height: 250px; background: #dcbfa0; 
+            border: 4px solid #000; box-shadow: 6px 6px 0 #000;
+            padding: 30px; font-size: 18px; color: #333; line-height: 2.2; text-align: left;
+            background-image: linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+            background-size: 100% 2.2em;
+            animation: bounceIn 0.8s forwards;
+        }
+
+        @keyframes blink { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounceIn { from { transform: scale(0); } to { transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <div id="hearts-container" class="hidden">
+        <div id="h1" class="pixel-heart empty"></div>
+        <div id="h2" class="pixel-heart empty"></div>
+        <div id="h3" class="pixel-heart empty"></div>
+    </div>
+
+    <div id="scene-1">
+        <div style="background:white; padding:20px; border:4px solid #000; box-shadow:4px 4px 0 #000;"><b>我親愛的羅小成！<br>生日快樂！！！！</b></div>
+        <button class="pixel-btn" onclick="startGame()">START</button>
+    </div>
+
+    <div id="game-container" class="hidden">
+        <img src="https://github.com/irenetong126-hash/hai/blob/main/Gemini_Generated_Image_z8x7kzz8x7kzz8x7-removebg-preview.png?raw=true" class="character">
+        <div class="dialog-wrapper" onclick="handleDialogClick()">
+            <div class="name-tag">童小寧</div>
+            <div class="rpg-box">
+                <div id="dialog-text"></div>
+                <div id="choice-area" class="hidden">
+                    <div class="options" id="opt-buttons"></div>
+                </div>
+                <div id="next-arrow" class="pixel-arrow">▼</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-scene" class="hidden">
+        <div id="pixel-envelope" class="hidden" onclick="openEnvelope()">
+            <div class="envelope-flap"></div>
+            <div class="click-tag">點擊</div>
+        </div>
+
+        <div id="pixel-letter" class="hidden">
+            <div class="letter-content">
+                <p>羅小成！尼好哇！！！恭喜你22歲ㄌ！</p>
+                <p>我相信今年的你一定會更努力</p>
+                <p>且追求到自己所愛的東西</p>
+                <p>很難過今年又沒辦法</p>
+                <p>陪在你身邊過生日ㄌ</p>
+                <p>但是你等等我吧！我一定盡快過去陪尼</p>
+                 <p>所以在這之前你要好好等等我好好加油喔！我愛死你了！我愛你喔！</p>
+              <p>ps.雖然你還拿不到禮物...但希望你會喜歡嗚嗚</p>
+                <p style="text-align: right; margin-top: 20px;">—— 童小寧</p>
+            </div>
+            <button class="pixel-btn" onclick="resetGame()">再一次！</button>
+        </div>
+    </div>
+
+    <script>
+        const scriptData = [
+            { text: "哈哈哈哈摟！終於找到你了！你是羅小成對吧！", type: "text" },
+            { text: "今天是你的22歲噎！", type: "text" },
+            { text: "生日快樂！！！", type: "text" },
+            { text: "好想見到你呦...不過呢！", type: "text" },
+            { text: "為了證實你是真的羅小成！", type: "text" },
+            { text: "我得考考你 看你瞭不瞭解我", type: "text" },
+            { text: "接招吧！！！！！！", type: "text" },
+            { text: "這是童小寧第幾次跟羅小成過生日？", type: "choice", options: ["第 2 次", "第 3 次"], callbacks: [ansWrong, ansRight1] },
+            { text: "童小寧最喜歡羅小成的地方？", type: "choice", options: ["溫柔,手很大、眼睛小小", "捲髮、翹屁屁、イケメン", "一直支持我和尊重我和愛我","以上皆是"], callbacks: [ansWrong2, ansWrong3, ansWrong4, ansRight2] },
+            { text: "我現在最想做的事情？", type: "choice", options: ["躺在床上睡覺","跟你玩一場兩人摔角", "把你撲倒、親你、咬你", "立刻跑去日本把你綁架回國"], callbacks: [ansWrong5, ansWrong6, ansWrong7, ansRight3] },
+            { text: "嘿嘿嘿，三關都過了！你果然是真的羅小成！只好把我的愛都給你！", type: "text" },
+            { text: "你太厲害了！現在就想飛撲到你身上！", type: "text" },
+        
+          { text: "其實呢... 我有個東西想給你...", type: "text" }
+        ];
+
+        let currentIdx = 0, charIndex = 0, isTyping = false, hearts = 0, isFeedbackMode = false, isRetryMode = false;
+
+        function updateHearts() {
+            for(let i=1; i<=3; i++) {
+                const h = document.getElementById('h'+i);
+                if (i <= hearts) h.classList.remove('empty'); else h.classList.add('empty');
+            }
+        }
+
+        function startGame() {
+            document.getElementById('scene-1').classList.add('hidden');
+            document.getElementById('game-container').classList.remove('hidden');
+            document.getElementById('hearts-container').classList.remove('hidden');
+            startTyping();
+            createFirework();
+        }
+
+        function startTyping() {
+            isTyping = true; isFeedbackMode = false; charIndex = 0;
+            document.getElementById('dialog-text').innerHTML = "";
+            document.getElementById('next-arrow').classList.add('hidden');
+            document.getElementById('choice-area').classList.add('hidden');
+            typeWriter();
+        }
+
+        function typeWriter() {
+            const currentItem = scriptData[currentIdx];
+            if (charIndex < currentItem.text.length) {
+                document.getElementById('dialog-text').innerHTML += currentItem.text.charAt(charIndex);
+                charIndex++; setTimeout(typeWriter, 50);
+            } else {
+                isTyping = false;
+                if (currentItem.type === "choice") showOptions(currentItem);
+                else document.getElementById('next-arrow').classList.remove('hidden');
+            }
+        }
+
+        function showOptions(item) {
+            const area = document.getElementById('opt-buttons'); area.innerHTML = "";
+            item.options.forEach((label, i) => {
+                const btn = document.createElement('button'); btn.className = "opt"; btn.innerText = label;
+                btn.onclick = (e) => { e.stopPropagation(); item.callbacks[i](); };
+                area.appendChild(btn);
+            });
+            document.getElementById('choice-area').classList.remove('hidden');
+        }
+
+        function handleDialogClick() {
+            if (isTyping) {
+                charIndex = scriptData[currentIdx].text.length;
+                document.getElementById('dialog-text').innerHTML = scriptData[currentIdx].text;
+                isTyping = false;
+                if (scriptData[currentIdx].type === "choice") showOptions(scriptData[currentIdx]);
+                else document.getElementById('next-arrow').classList.remove('hidden');
+                return;
+            }
+            if (isFeedbackMode) {
+                if (isRetryMode) startTyping();
+                else { currentIdx++; startTyping(); }
+                return;
+            }
+            if (!document.getElementById('next-arrow').classList.contains('hidden')) {
+                if (currentIdx === scriptData.length - 1) showLetterScene();
+                else { currentIdx++; startTyping(); }
+            }
+        }
+
+        function showFeedback(msg, retry) {
+            isFeedbackMode = true; isRetryMode = retry;
+            document.getElementById('choice-area').classList.add('hidden');
+            document.getElementById('dialog-text').innerHTML = msg;
+            document.getElementById('next-arrow').classList.remove('hidden');
+        }
+
+        function ansWrong() { showFeedback("嗚嗚嗚嗚嗚 你不可能不知道！", true); }
+        function ansWrong2() { showFeedback("確實我都很喜歡！！！但是...", true); }
+        function ansWrong3() { showFeedback("當然是！畢竟你是我心中的イケメン❤ 嘻嘻，但是...", true); }
+        function ansWrong4() { showFeedback("謝謝尼，一直一直不管何時都是在背後推我一把！雖然有時候我固執愛走自己的路！但是你很重要！！不過...", true); } 
+        function ansWrong5() { showFeedback("？？？？？？？", true); }
+        function ansWrong6() { showFeedback("是很想...但不是現在！", true); }
+        function ansWrong7() { showFeedback("確實現在很想！！！不過...", true); }
+        function ansRight1() { hearts = 1; updateHearts(); showFeedback("嘻嘻！再錯我也沒辦法ㄌ", false); }
+        function ansRight2() { hearts = 2; updateHearts(); showFeedback("你挺行的嘛！還得是羅小成！！！全部都是！還有更多更多這只是冰山一角！我太愛你！", false); }
+        function ansRight3() { hearts = 3; updateHearts(); showFeedback("果然是我推我最愛的羅選手！沒辦法立刻到你身邊真的好痛苦...", false); }
+
+        function showLetterScene() {
+            document.getElementById('game-container').classList.add('hidden');
+            document.getElementById('success-scene').classList.remove('hidden');
+            document.getElementById('pixel-envelope').classList.remove('hidden');
+        }
+
+        function openEnvelope() {
+            document.getElementById('pixel-envelope').classList.add('hidden');
+            document.getElementById('pixel-letter').classList.remove('hidden');
+        }
+
+        function resetGame() {
+            currentIdx = 0; hearts = 0; updateHearts();
+            document.getElementById('success-scene').classList.add('hidden');
+            document.getElementById('pixel-letter').classList.add('hidden');
+            document.getElementById('scene-1').classList.remove('hidden');
+        }
+
+        function createFirework() {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed'; canvas.style.top = 0; canvas.style.left = 0; canvas.style.pointerEvents = 'none'; canvas.style.zIndex = 5;
+            document.body.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            let particles = [];
+            setInterval(() => {
+                const x = Math.random()*canvas.width, y = Math.random()*canvas.height/2;
+                for(let i=0; i<15; i++) particles.push({x,y,vx:(Math.random()-0.5)*10,vy:(Math.random()-0.5)*10,a:1});
+            }, 800);
+            function loop() {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                particles.forEach((p,i)=>{
+                    p.x+=p.vx; p.y+=p.vy; p.vy+=0.2; p.a-=0.02;
+                    ctx.fillStyle=`rgba(255,255,255,${p.a})`; ctx.fillRect(p.x,p.y,5,5);
+                    if(p.a<=0) particles.splice(i,1);
+                });
+                requestAnimationFrame(loop);
+            }
+            loop();
+        }
+    </script>
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
